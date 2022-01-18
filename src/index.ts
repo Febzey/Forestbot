@@ -8,11 +8,11 @@ import webSocket            from "./websocket/websocket.js";
 import logTps               from "./Intervals/logTps.js";
 import LogPlayerCount       from "./Intervals/logPlayerCount.js";
 import loadCommands         from "./functions/loadCommands.js";
-import EventEmitter         from 'events';
-import tab                  from './tablist/tab.js';
+import tab                  from "./tablist/tab.js";
 import { bot_config }       from "./config.js";
-import { Bot }              from 'mineflayer';
-import { Client }           from 'discord.js';
+import { Bot }              from "mineflayer";
+import { Client }           from "discord.js";
+import EventEmitter         from "events";
 EventEmitter.defaultMaxListeners = 25;
 
 export const client: Client = await loginDiscordbot() as Client;
