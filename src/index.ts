@@ -6,7 +6,7 @@ import logPlaytime          from "./Intervals/savePlaytime.js";
 import visualRangeDetector  from "./util/visualRangeDetector.js";
 import webSocket            from "./websocket/websocket.js";
 import logTps               from "./Intervals/logTps.js";
-import LogPlayerCount       from "./Intervals/logplayercount.js";
+import LogPlayerCount       from "./Intervals/logPlayerCount.js";
 import loadCommands         from "./functions/loadCommands.js";
 import EventEmitter         from 'events';
 import tab                  from './tablist/tab.js';

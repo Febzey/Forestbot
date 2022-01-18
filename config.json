@@ -23,8 +23,8 @@
 
     "websocket": true,
 
-    "logTps": true,
-    "logPlayerCount": true,
+    "logTps": false,
+    "logPlayerCount": false,
 
     "welcomeMessages": true,
     "infoJoinMessages": false

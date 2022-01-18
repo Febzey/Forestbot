@@ -1,4 +1,4 @@
-import { __Tps } from "../tps/getTps.js";
+import { __Tps } from "../tps/gettps.js";
 export default {
     commands: ['tps'],
     minArgs: 0,
