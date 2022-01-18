@@ -1,0 +1,14 @@
+Use !playtime <username> to see a users playtime
+See when a player joined with !joindate
+See how many kills/deaths a user has with !kd
+Search the urban dictionary with !urban
+See who has the best ping with !bp  
+See who has the worst ping with !wp
+Check how many messages you or another player has sent with !msgcount
+Bring up a random message with !quote
+See when a player was last seen with !seen
+Find me with !coords
+See the old names of a user with !oldnames
+Check your ping or another players with !ping
+Add a fact with '!fact add <your fact>', 'Search a fact with !fact <ID>'
+Get a random fact with '!fact random', Get total fact count with '!fact total'

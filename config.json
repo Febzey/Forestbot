@@ -1,0 +1,31 @@
+{
+    "mainChannelId" : "898383935145406464",
+    "secretChannelId": "932123466474344458",
+
+    "Discord_whitelist": ["703044116019281963"],
+    "whitelist": ["Furia", "notFebzey", "Al3xi_"],
+
+    "apiUrl": "http://localhost:3001",
+
+    "loadCommands": true,
+
+    "visualRange": true,
+
+    "liveViewer": false,
+    "liveViewerPort": 3000,
+
+    "saveTablist": true,
+
+    "antiAfk": false,
+
+    "advertise": true,
+    "advertiseTime": 45,
+
+    "websocket": true,
+
+    "logTps": true,
+    "logPlayerCount": true,
+
+    "welcomeMessages": true,
+    "infoJoinMessages": false
+}

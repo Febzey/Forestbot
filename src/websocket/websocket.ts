@@ -1,0 +1,11 @@
+import { WebSocketServer } from 'ws';
+import { bot } from '../index.js';
+
+const webSocket = () => {
+    const wss = new WebSocketServer({
+        port: 8383,
+        path: "/playerlist"
+    });
+    wss.on("connection", client => client.send(JSON.stringify(Object.keys(bot.players))));
+};
+export default webSocket;
