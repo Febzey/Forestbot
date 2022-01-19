@@ -1,4 +1,11 @@
 import date from 'date-and-time';
+import TimeAgo from 'javascript-time-ago';
+import { createRequire } from "module"; 
+const require = createRequire(import.meta.url); 
+const en = require('javascript-time-ago/locale/en.json') 
+TimeAgo.addDefaultLocale(en)
+const timeAgo = new TimeAgo('en-US');
+
 export const monthYear = () => {
     const t:date = new Date();
     const p:string = date.compile("MMM DD/YY");
@@ -19,3 +26,5 @@ export const dhms = (time: number | string) => {
     (m = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60)));
     return `${d} Days(s) ${h} hours ${m} minutes.`;
 };
+
+export const timeAgoStr = (time: number) => timeAgo.format(time);

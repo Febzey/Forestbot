@@ -30,12 +30,12 @@ export const bot_config = {
 export const apiUrl: string = configfile.apiUrl;
 
 export const botOptions: BotOptions = {
-    host:     process.env.MC_HOST           ||'localhost',
-    username: process.env.MC_USER           ||'Bot',
-    password: process.env.MC_PASS           ||null,
+    host:     process.env.MC_HOST           || 'localhost',
+    username: process.env.MC_USER           || 'Bot',
+    password: process.env.MC_PASS           || null,
     auth:     'microsoft',
-    version:  process.env.MC_VERSION        ||'1.17.1',
-    port:     parseInt(process.env.MC_PORT) ||25565
+    version:  process.env.MC_VERSION        || '1.17.1',
+    port:     parseInt(process.env.MC_PORT) || 25565
 };
 
 export const poolOptions: PoolConfig = {

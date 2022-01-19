@@ -3,6 +3,7 @@ import { apiUrl } from '../config.js';
 
 
 const Fetch = async (url: string) => {
+    console.log(apiUrl)
     try {
         const unParsedData: any = await fetch(`${apiUrl}${url}${process.env.DATABASE === 'eusurvival' && 'eusurvival'}`);
         const data = await unParsedData.json();

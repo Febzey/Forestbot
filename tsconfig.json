@@ -8,7 +8,8 @@
     "outDir": "dist",
     "watch": false,
     "removeComments": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "resolveJsonModule": true
   },
   "lib":["module"]
 }

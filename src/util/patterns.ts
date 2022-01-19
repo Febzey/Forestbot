@@ -116,21 +116,13 @@ export default function patterns(bot:any) {
         parse: true,
       });
     //----------------------------------------------------------------
-    bot.addChatPattern(
-      "pvp",
-      /^([^ ]*) (?:was slain by|was burnt to a crisp while fighting|was killed by magic whilst trying to escape|drowned whilst trying to escape|experienced kinetic energy whilst trying to escape|was shot by|was blown up by|hit the ground too hard whilst trying to escape|was killed trying to hurt) ([^ ]*)/,
-      { parse: true }
-    );
+
     bot.addChatPattern(
       "pvpMessages",
-      /^([^ ]*) (?:was slain by|was burnt to a crisp while fighting|was killed by magic whilst trying to escape|drowned whilst trying to escape|experienced kinetic energy whilst trying to escape|was shot by|was blown up by|hit the ground too hard whilst trying to escape|was killed trying to hurt) ([^ ]*)/,
+      /^([^ ]*) (?:was slain by|was burnt to a crisp while fighting|was killed by magic whilst trying to escape|drowned whilst trying to escape|experienced kinetic energy whilst trying to escape|was shot by|was blown up by|hit the ground too hard whilst trying to escape|was killed trying to hurt|tried to swim in lava to escape) ([^ ]*)/,
       { parse: false }
     );
-    bot.addChatPattern(
-      "pve",
-      /^([^ ]*) (?:died|tried to swim in lava|was pricked to death|Was killed by nature|drowned|blew up|was killed by|hit the ground too hard|experienced kinetic energy|fell from a high place|fell off a ladder|fell while climbing|went up in flames|burned to death|was struck by lightning|was killed by magic|starved to death|was stung to death|suffocated in a wall|withered away|froze to death|went off with a bang)$/,
-      { parse: true }
-    );
+
     bot.addChatPattern(
       "pveMessages",
       /^([^ ]*) (?:died|tried to swim in lava|was pricked to death|Was killed by nature|drowned|blew up|was killed by|hit the ground too hard|experienced kinetic energy|fell from a high place|fell off a ladder|fell while climbing|went up in flames|burned to death|was struck by lightning|was killed by magic|starved to death|was stung to death|suffocated in a wall|withered away|froze to death|went off with a bang)$/,
