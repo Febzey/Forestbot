@@ -24,6 +24,7 @@ export const bot_config = {
     loadCommands:       configfile.loadCommands,
     Discord_whitelist:  configfile.Discord_whitelist,
     saveTablist:        configfile.saveTablist,
+    useSecretChannel:   configfile.useSecretChannel,
 };
 
 export const apiUrl: string = configfile.apiUrl;

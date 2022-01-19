@@ -5,6 +5,7 @@ import { bot_config } from '../../config.js';
 
 
 export const relayEmbed = (text: string, color: string) => {
+    if (!bot_config.useSecretChannel) return;
     const Client: any = client;
     if (!Client) return;
     color = getColor(color);
