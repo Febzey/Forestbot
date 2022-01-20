@@ -11,7 +11,6 @@ const Fetch = async (url: string) => {
         return data
     }
     catch (e) {
-        console.error(e);
         return false;
     }
 }

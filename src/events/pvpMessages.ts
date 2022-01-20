@@ -9,7 +9,12 @@ export default {
         const contentArray: string[] = content.toString().split(" ");
 
         const victim: string = contentArray[0];
-        const murderer: string = contentArray[contentArray.length - 1];
+        let murderer: string = contentArray[contentArray.length - 1];
+
+        if (contentArray[5] === 'using') { 
+            console.log("using a named weapon");
+            murderer = contentArray[4];
+        }
 
         database.query(`UPDATE users SET kills = kills + 1 WHERE username=?`, [murderer], (err: MysqlError) => err && console.error(err));
         database.query(`UPDATE users SET deaths = deaths + 1 WHERE username=?`, [victim], (err: MysqlError) => err && console.error(err))
