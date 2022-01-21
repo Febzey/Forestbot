@@ -6,7 +6,7 @@ export default {
     once: false,
     async execute(content: BotEvents) {
         embed(`Kicked! Reason: ${content}`, `orange`);
-        await sleep(3000);
+        await sleep(30000);
         process.exit(0);
     }
 };

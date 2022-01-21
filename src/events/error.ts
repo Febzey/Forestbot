@@ -8,6 +8,7 @@ export default {
     name: "error",
     once: false,
     async execute(e: unknown) {
+        
         console.log(e);
 
         if (e["code"] !== "ECONNREFUSED") {

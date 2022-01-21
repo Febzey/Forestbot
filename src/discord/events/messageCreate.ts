@@ -7,6 +7,7 @@ export default {
     once: false,
     async execute(message: Message, client: Client) {
         const { content, author, channel, member } = message;
+
         if (!channels || channels.length < 1 || content.includes('\n') || author.id === client.user.id || !bot) return;
 
         if (content.startsWith("!goto")) {
@@ -16,6 +17,21 @@ export default {
             const arr = content.split(" ");
             arr.shift();
             return goto(arr);
+        }
+        
+        const whisperCommandAlias: string[] = ['/whisper', '/w'];
+        
+        if (!channels.includes(channel.id)) return;
+
+        for (const alias of whisperCommandAlias) {
+            if (content.startsWith(alias)) { 
+                const args: string[] = content.split(" ");
+                args.shift();
+                const userToWhisper = args[0];
+                args.shift();
+                const msgtoSend: string = args.join(' ');
+                return bot.whisper(userToWhisper, `[${member.user.tag}]: ${msgtoSend}`)
+            }
         }
 
         channels.forEach(Channel => {

@@ -1,8 +1,8 @@
-import { WebSocketServer } from 'ws';
+import { WebSocketServer, Server } from 'ws';
 import { bot } from '../index.js';
 
 const webSocket = () => {
-    const wss = new WebSocketServer({
+    const wss: Server = new WebSocketServer({
         port: 8383,
         path: "/playerlist"
     });
