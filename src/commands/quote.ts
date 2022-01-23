@@ -14,7 +14,7 @@ export default {
         if (!data) return bot.whisper(username, "User not found or Api error.");
 
         return args.length === 0
-        ? bot.chat(`[${username}}] ${data.message}`)
+        ? bot.chat(`[${username}] ${data.message}`)
         : bot.chat(`[${args[0]}] ${data.message}`);
      
     },
