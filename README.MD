@@ -8,6 +8,7 @@ Forestbot is a Minecraft bot made with Mineflayer and Typescript along with many
 Multiple config options available.
 Records almost every statstic you would want within a Minecraft server.
 
+https://forestbot.io 
 
 ###### How to use.
 
