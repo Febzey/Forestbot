@@ -4,7 +4,7 @@ import { createRequire } from 'module';
 const { pathfinder, Movements, goals } = require('mineflayer-pathfinder');
 import { relayEmbed } from '../discordEmbeds/embed.js';
 import { bot } from '../../index.js';
-const GoalNear = goals.GoalNear;
+const GoalNearXZ = goals.GoalNearXZ;
 
 const goto = (args: string[]) => {
     if (args.length !== 3) return relayEmbed(`X, Y, and Z coordinates are required.`, 'red');
@@ -20,7 +20,7 @@ const goto = (args: string[]) => {
     defaultMove.canDig = false;
     defaultMove.allowSprinting = false
     Bot.pathfinder.setMovements(defaultMove, true);
-    Bot.pathfinder.setGoal(new GoalNear(x, y, z, 1))
+    Bot.pathfinder.setGoal(new GoalNearXZ(x, y, z, 1))
     Bot.once('goal_reached', () => {
         console.log(`Made it to: X:${x}, Y:${y}, Z:${z}`);
         return relayEmbed(`Made it to the goal: **X:** ${x} , **Y:**${y}, **Z:** ${z}`, 'green');

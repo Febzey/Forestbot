@@ -11,7 +11,6 @@ const visualRangeDetector = () => {
         const formatedUUID = UUID.replace(/-/g, "");
         const x: number = packet.x.toFixed(2);
         const z: number = packet.z.toFixed(2);
-
         MojangAPI.profile((formatedUUID), (err:unknown, res: any) => {
             if (err) return console.error(err);
             const username = res.name;
