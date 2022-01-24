@@ -12,7 +12,6 @@ const getChannels = async () => {
         ? channels.push(ele.channelID)
         : 0;
     }) 
-
     console.log(chalk.green("got channel id's successfully."))
     return channels;
 }

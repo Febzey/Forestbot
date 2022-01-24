@@ -17,7 +17,8 @@ EventEmitter.defaultMaxListeners = 25;
 
 export const client: Client = await loginDiscordbot() as Client;
 export const bot: Bot = startBot();
-export const channels = await getChannels();
+export let channels: string[] = await getChannels();
+setInterval(async () => channels = await getChannels(), 2 * 60000);
 
 (async () => {
     logPlaytime();
