@@ -8,7 +8,7 @@
     "whitelist": ["Furia", "notFebzey", "Al3xi_"],
 
     "apiUrl": "https://forestbot.io",
-    "server": "newtest",
+    "server": "simplyvanilla",
 
     "loadCommands": true,
 
