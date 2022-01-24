@@ -25,9 +25,11 @@ export const bot_config = {
     Discord_whitelist:  configfile.Discord_whitelist,
     saveTablist:        configfile.saveTablist,
     useSecretChannel:   configfile.useSecretChannel,
+    server:             configfile.server,
 };
 
 export const apiUrl: string = configfile.apiUrl;
+export const serverString: string = configfile.server
 
 export const botOptions: BotOptions = {
     host:     process.env.MC_HOST           || 'localhost',

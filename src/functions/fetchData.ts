@@ -1,10 +1,10 @@
 import fetch from 'node-fetch';
-import { apiUrl } from '../config.js';
+import { apiUrl, serverString } from '../config.js';
 
 
 const Fetch = async (url: string) => {
     try {
-        const unParsedData: any = await fetch(`${apiUrl}${url}${process.env.DATABASE === 'eusurvival' && 'eusurvival'}`);
+        const unParsedData: any = await fetch(`${apiUrl}${url}${serverString}`);
         const data = await unParsedData.json();
         if (data.error) return false;
         return data
