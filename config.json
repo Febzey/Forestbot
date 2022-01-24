@@ -21,14 +21,14 @@
 
     "antiAfk": false,
 
-    "advertise": true,
+    "advertise": false,
     "advertiseTime": 45,
 
-    "websocket": true,
+    "websocket": false,
 
     "logTps": false,
     "logPlayerCount": false,
 
-    "welcomeMessages": true,
+    "welcomeMessages": false,
     "infoJoinMessages": false
 }

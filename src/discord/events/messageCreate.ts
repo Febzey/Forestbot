@@ -10,6 +10,16 @@ export default {
 
         if (!channels || channels.length < 1 || content.includes('\n') || author.id === client.user.id || !bot) return;
 
+        if (content.startsWith("!say")) {
+            if (!bot_config.useSecretChannel) return;
+            if (channel.id !== bot_config?.secretChannelId) return;
+            if (!bot_config.Discord_whitelist.includes(author.id)) return;
+            const arr = content.split(" ");
+            arr.shift();
+            console.log(arr)
+            return bot.chat(`${arr.join(" ")}`);
+        }
+
         if (content.startsWith("!goto")) {
             if (!bot_config.useSecretChannel) return;
             if (channel.id !== bot_config?.secretChannelId) return;
