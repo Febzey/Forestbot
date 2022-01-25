@@ -1,4 +1,5 @@
 import { createBot, Bot } from 'mineflayer';
+import { pathfinder } from 'mineflayer-pathfinder';
 import {botOptions} from './config.js';
 import handleEvents from './functions/handleEvents.js';
 import patterns from './util/patterns.js';
@@ -9,6 +10,7 @@ const startBot = () => {
     handleEvents(bot)
     patterns(bot);
     TPS(bot);
+    bot.loadPlugin(pathfinder);
     return bot;
 };
 
