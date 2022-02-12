@@ -17,7 +17,11 @@ const webSocket = async () => {
 
     wss.on("connection", client => {
         client.send(JSON.stringify({playerlist: Object.keys(bot.players), uniquePlayers: uniquePlayers[0].cnt ? uniquePlayers[0].cnt : null}));
-        client.on("message", (content: any) => bot.chat(`[WEB] » ${content.toString()}`))
+        client.on("message", (content: any) => {
+
+            if (!content.toString()) return;
+            bot.chat(`[WEB] » ${content.toString()}`)
+        })
 
     });
 
