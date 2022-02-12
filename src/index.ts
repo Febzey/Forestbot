@@ -13,7 +13,7 @@ import { bot_config }       from "./config.js";
 import { Bot }              from "mineflayer";
 import { Client }           from "discord.js";
 import EventEmitter         from "events";
-EventEmitter.defaultMaxListeners = 25;
+EventEmitter.defaultMaxListeners = 26;
 
 export const client: Client = await loginDiscordbot() as Client;
 export const bot: Bot = startBot();

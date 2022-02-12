@@ -74,6 +74,11 @@ export default function patterns(bot: any) {
   bot.addChatPattern("chat", /^\[Discord\] \[Donator\] ([^ ]*) > (.*)$/, options);
 
   bot.addChatPattern("chat", /^\[Discord\] \[Nitro Booster\] ([^ ]*) > (.*)$/, options);
+  
+  /**
+   * [YouTube] user » message
+   */
+  bot.addChatPattern("chat", /^\[YouTube\] ([^ ]*) » (.*)$/, options);
   //----------------------------------------------------------------
 
   bot.addChatPattern(

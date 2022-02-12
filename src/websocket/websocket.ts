@@ -1,11 +1,36 @@
 import { WebSocketServer, Server } from 'ws';
 import { bot } from '../index.js';
+import { bot_config } from '../config.js';
+import { BotEvents } from 'mineflayer';
+import { promisify } from 'util';
+import database from '../database/createPool.js';
 
-const webSocket = () => {
+const promisedQuery = promisify(database.query).bind(database);
+
+const webSocket = async () => {
     const wss: Server = new WebSocketServer({
-        port: 8383,
+        port: bot_config.websocket_port,
         path: "/playerlist"
     });
-    wss.on("connection", client => client.send(JSON.stringify(Object.keys(bot.players))));
+
+    const uniquePlayers = await promisedQuery(`SELECT COUNT(*) as cnt FROM users`)
+
+    wss.on("connection", client => {
+        client.send(JSON.stringify({playerlist: Object.keys(bot.players), uniquePlayers: uniquePlayers[0].cnt ? uniquePlayers[0].cnt : null}));
+        client.on("message", (content: any) => bot.chat(`[WEB] » ${content.toString()}`))
+
+    });
+
+    if (!bot_config.websocket_livechat) return;
+    bot.on("chat:chat" as keyof BotEvents, (content: any) => {
+        if (!wss.clients) return;
+        const username: string = content[0][0],
+              message: string = content[0][1];
+        wss.clients.forEach(set => {
+            return set.send(JSON.stringify({user: username, msg: message}));
+        })
+    })
+
+
 };
 export default webSocket;

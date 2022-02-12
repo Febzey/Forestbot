@@ -21,10 +21,13 @@
 
     "antiAfk": false,
 
-    "advertise": false,
+    "advertise": false, 
     "advertiseTime": 45,
 
-    "websocket": false,
+    "websocket": true,
+    "websocket_livechat": true,
+    "websocket_uniqueplayers": true,
+    "websocket_port": 3333,
 
     "logTps": false,
     "logPlayerCount": false,
