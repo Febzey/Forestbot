@@ -20,7 +20,7 @@ const webSocket = async () => {
         client.on("message", (content: any) => {
 
             if (!content.toString()) return;
-            bot.chat(`[WEB] » ${content.toString()}`)
+            bot.chat(`[W]${content.toString()}`)
         })
 
     });
