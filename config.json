@@ -27,7 +27,8 @@
     "websocket": true,
     "websocket_livechat": true,
     "websocket_uniqueplayers": true,
-    "websocket_port": 3333,
+    "websocket_port": 2052,
+    "allowedOrigins": ["https://www.eusurvival.com", "http://localhost:2052", "http://localhost:3001", "http://localhost:3000"],
 
     "logTps": false,
     "logPlayerCount": false,
