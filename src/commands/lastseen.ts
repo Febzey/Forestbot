@@ -1,21 +1,16 @@
-import { Bot } from 'mineflayer'
-import Fetch from '../functions/fetchData.js';
-
+import type Bot from '../structure/mineflayer/Bot.js';
 
 export default {
-    commands: ['seen', 'lastseen'],
+    commandID: 11,
+    commands: ['lastseen'],
     minArgs: 0,
     maxArgs: 1,
-    callback: async (username: string, args: any[], text: string, bot: Bot) => {
-        const data = args.length === 0 
-        ? await Fetch(`/lastseen/${username}/`)
-        : await Fetch(`/lastseen/${args[0]}/`);
-
-        if (!data) return bot.whisper(username, "User not found or Api error.");
-
-        return args.length === 0
-        ? bot.whisper(username, `${data.lastseen}`)
-        : bot.chat(`[${args[0]}] was lastseen ${data.lastseen}`);
-     
-    },
-}
+    execute: async (user: string, args: any[], bot: Bot) => {
+        const search = args[1] ? args[1] : user;
+    
+        const data = await bot.fetchUser(search, "lastseen");
+        if (!data) return  bot.bot.whisper(user, "User not found.")
+    
+        return bot.bot.chat(`${search}: ${data.lastseen}`);
+    }
+ }

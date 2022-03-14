@@ -1,15 +1,13 @@
-import { dateTime } from '../util/time.js';
-import { embed } from '../util/discordEmbeds/embed.js';
-import { Player } from 'mineflayer';
-import database from '../database/createPool.js';
+import type { Player }  from "mineflayer";
+import type Forestbot   from "../structure/mineflayer/Bot";
 
 export default {
-    name: 'playerLeft',
+    name: "playerLeft",
     once: false,
-    async execute(player: Player) {
-        embed(`${player.username} left the server.`, `red`);
-        if (!database) return;
-        database.query("UPDATE users SET leaves = leaves + 1 , lastseen=? WHERE username=?", [dateTime(), player.username]);
+    run: (player: Player, Bot: Forestbot) => {
+        Bot.ForestBot.DClient.chatEmbed(`[-] ${player.username}`, Bot.ForestBot.DClient.colors.red);
+        
+        Bot.ForestBot.Database.updateUserLeave([Bot.ForestBot.time.dateTime(), player.uuid])
         return;
     }
-};
+}

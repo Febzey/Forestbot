@@ -1,10 +1,10 @@
-import { embed } from '../util/discordEmbeds/embed.js';
-import chalk from 'chalk';
+import type ForestBot     from '../structure/mineflayer/Bot.js';
+
 export default { 
-    name: 'login',
-    once: false,
-    execute () {
-        embed(`Logged into **${process.env.MC_HOST}** successfully`,'green')
-        return console.log(chalk.green("Bot logged in succesfully"))
+    name: "login",
+    once: true,
+    run: (Bot: ForestBot) => {
+        Bot.ForestBot.Logger.mineflayerReady();
+        return Bot.ForestBot.DClient.chatEmbed(`**Successfully logged in.**`, Bot.ForestBot.DClient.colors.green)
     }
- }
+}

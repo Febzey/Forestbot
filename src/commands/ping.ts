@@ -1,30 +1,15 @@
-import { Bot } from "mineflayer";
+import type Bot from '../structure/mineflayer/Bot.js';
 
 export default {
+    commandID: 13,
     commands: ['ping'],
     minArgs: 0,
     maxArgs: 1,
-    callback: (username:string, args:string[], text:string, bot:Bot) => {
-        const checkPing = (user: string) => {
-            if (user === username) {
-                try {
-                    return bot.whisper(username, `Your ping is: ${bot.players[user].ping}ms`);
-                } 
-                catch {
-                    return;
-                }
-            }
-            if (user !== username) {    
-                try {
-                    return bot.chat(`[${user}] ${bot.players[user].ping}ms`);
-                }
-                catch {
-                    return bot.whisper(username, "I do not recognize this user.");
-                }
-            }
+    execute: async (user: string, args: any[], bot: Bot) => {
+        const search = args[1] ? args[1] : user;
+        try {
+            return bot.bot.chat(`${search}: ${bot.bot.players[search].ping}ms`)
         }
-        if (args.length <= 0) checkPing(username)
-        if (args.length === 1) checkPing(args.toString());
-        return;
+        catch { return }
     }
-}
+ }

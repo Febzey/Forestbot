@@ -1,21 +1,16 @@
-import { Bot } from 'mineflayer'
-import Fetch from '../functions/fetchData.js';
-
+import type Bot from '../structure/mineflayer/Bot.js';
 
 export default {
+    commandID: 6,
     commands: ['joins'],
     minArgs: 0,
     maxArgs: 1,
-    callback: async (username: string, args: any[], text: string, bot: Bot) => {
-        const data = args.length === 0 
-        ? await Fetch(`/joins/${username}/`)
-        : await Fetch(`/joins/${args[0]}/`);
+    execute: async (user: string, args: any[], bot: Bot) => {
+        const search = args[1] ? args[1] : user;
 
-        if (!data) return bot.whisper(username, "User not found or Api error.")
+        const data = await bot.fetchUser(search, "joins");
+        if (!data) return bot.bot.whisper(user, "User not found.")
 
-        return args.length === 0
-        ? bot.whisper(username, `${data.joins} times`)
-        : bot.chat(`[${args[0]}]: has joined ${data.joins} times.`);
-     
-    },
-}
+        return bot.bot.chat(`${search}: ${data.joins} times`)
+    }
+ }

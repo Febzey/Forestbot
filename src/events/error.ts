@@ -1,46 +1,15 @@
-import { embed } from "../util/discordEmbeds/embed.js";
-import { client } from "../index.js";
-import { bot_config } from "../config.js";
-import sleep from '../util/sleep.js';
-const mcIp: string = process.env.MC_HOST;
+import type Bot                   from '../structure/mineflayer/Bot.js';
+import { BotEvents }                    from 'mineflayer';
 
-export default {
+export default { 
     name: "error",
     once: false,
-    async execute(e: unknown) {
-        
-        console.log(e);
+    run: (content: BotEvents, Bot: Bot) => {
+        Bot.ForestBot.DClient.chatEmbed(`**Unexpected Error.** \`Error:\` ${content} \n> Reconnecting in: ${Bot.ForestBot.config.config.reconnect_time / 1000} seconds.`, Bot.ForestBot.DClient.colors.orange)
 
-        if (e["code"] !== "ECONNREFUSED") {
-            await sleep(35000);
-            process.exit(1);
-        }
+        return setTimeout(() => {
+            process.exit();
+        }, Bot.ForestBot.config.config.reconnect_time);
 
-
-        embed(`**${mcIp}** seems to be offline.`, "red");
-        client.channels.cache.get(bot_config.mainChannelId)["send"]({
-            embeds: [
-                {
-                    color: "#ffa500",
-                    description: "Should I attempt to reconnect?",
-                },
-            ],
-            components: [
-                {
-                    type: 1,
-                    components: [
-                        {
-                            type: 2,
-                            style: 2,
-                            label: "Reconnect",
-                            custom_id: `${process.env.DATABASE}`,
-                        },
-                    ],
-                },
-            ],
-        });
-
-
-
-    },
-};
+    }
+}

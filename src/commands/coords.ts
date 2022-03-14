@@ -1,14 +1,12 @@
-import { Bot } from 'mineflayer';
-import { bot_config } from '../config.js';
+import type Bot from '../structure/mineflayer/Bot.js';
 
 export default {
+    commandID: 14,
     commands: ['coords'],
     minArgs: 0,
-    maxArgs: 0,
-    callback: (username:string, args:string[], text:string, bot:Bot) => {
-        if (!bot_config.whitelist.includes(username)) return;
-
-        bot.whisper(username, `I am currently at: ${bot.entity.position}`);
-        return;
-    },
-}
+    maxArgs: 1,
+    execute: async (user: string, args: any[], bot: Bot) => {
+        if (bot.ForestBot.config.config.use_whitelist && !bot.whitelist.includes(user)) return;
+        return bot.bot.whisper(user, `I am currently at: X: ${Math.trunc(bot.bot.entity.position.x)} Y: ${Math.trunc(bot.bot.entity.position.y)} Z: ${Math.trunc(bot.bot.entity.position.z)}`)
+    }
+ }

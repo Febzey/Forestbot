@@ -1,38 +1,21 @@
 {
-    "mainChannelId" : "898383935145406464",
-    "secretChannelId": "932123466474344458",
+    "main_channel": "952081406421528626",
+    "discord_whitelist": ["703044116019281963"],
 
-    "useSecretChannel": true,
+    "use_whitelist": false,
+    "mc_whitelist": ["Furia", "notFebzey", "Positrox"],
 
-    "Discord_whitelist": ["703044116019281963"],
-    "whitelist": ["Furia", "notFebzey", "Al3xi_"],
+    "api_url": "https://forestbot.org",
+    "server": "newtest",
 
-    "apiUrl": "https://forestbot.io",
-    "server": "simplyvanilla",
+    "reconnect_time": 36000,
+    "welcome_messages": true,
 
-    "loadCommands": true,
+    "use_database": true,
+    "use_discord": true,
 
-    "visualRange": true,
-
-    "liveViewer": false,
-    "liveViewerPort": 3000,
-
-    "saveTablist": true,
-
-    "antiAfk": false,
-
-    "advertise": false, 
-    "advertiseTime": 45,
-
-    "websocket": true,
-    "websocket_livechat": true,
-    "websocket_uniqueplayers": true,
-    "websocket_port": 2052,
-    "allowedOrigins": ["https://simplyvanilla.net", "https://www.eusurvival.com", "http://localhost:2052", "http://localhost:3001", "http://localhost:3000"],
-
-    "logTps": false,
-    "logPlayerCount": false,
-
-    "welcomeMessages": false,
-    "infoJoinMessages": false
+    "use_websocket": true,
+    "websocket_port": 8080,
+    "websocket_path": "/playerlist",
+    "websocket_livechat": false
 }

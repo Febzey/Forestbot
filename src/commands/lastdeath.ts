@@ -1,19 +1,17 @@
-import { Bot } from 'mineflayer'
-import Fetch from '../functions/fetchData.js';
-import { timeAgoStr } from '../util/time.js';
+import type Bot       from '../structure/mineflayer/Bot.js';
+import { timeAgoStr } from '../util/time/convert.js';
+
 export default {
+    commandID: 7,
     commands: ['lastdeath'],
     minArgs: 0,
     maxArgs: 1,
-    callback: async (username: string, args: any[], text: string, bot: Bot) => {
-        const data = args.length === 0
-            ? await Fetch(`/lastdeath/${username}/`)
-            : await Fetch(`/lastdeath/${args[0]}/`);
+    execute: async (user: string, args: any[], bot: Bot) => {
+        const search = args[1] ? args[1] : user;
 
-        if (!data) return bot.whisper(username, "User not found or Api error.")
+        const data = await bot.fetchUser(search, "lastdeath");
+        if (!data) return bot.bot.whisper(user, "User not found.")
 
-        return args.length === 0
-            ? bot.whisper(username, `${data.death}, ${timeAgoStr(data.time)}`)
-            : bot.chat(`${data.death}, ${timeAgoStr(data.time)}`);
-    },
-}
+        return bot.bot.chat(`${data.death}, ${timeAgoStr(data.time)}`)
+    }
+ }

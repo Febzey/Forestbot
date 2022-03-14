@@ -1,11 +1,12 @@
-import { Bot } from "mineflayer";
+import type Bot from '../structure/mineflayer/Bot.js';
 
-export default { 
-    commands: ['bestping', 'bp'],
-    minArgs:0,
-    maxArgs:0,
-    callback: (username:string, args:string[], text:string, bot:Bot) => {
-        const h:any[] = Object.entries(bot.players).sort((a:any[],b:any[]) => a[1].ping - b[1].ping);
-        return bot.chat(`Best Ping: [${h[0][0]}]: ${bot.players[h[0][0]].ping}ms`)
+export default {
+    commandID: 4,
+    commands: ['bp', 'bestping'],
+    minArgs: 0,
+    maxArgs: 1,
+    execute: async (user: string, args: any[], bot: Bot) => {
+        const h:any[] = Object.entries(bot.bot.players).sort((a:any[],b:any[]) => a[1].ping - b[1].ping);
+        return bot.bot.chat(`Best Ping: [${h[0][0]}]: ${bot.bot.players[h[0][0]].ping}ms`)
     }
-}
+ }
