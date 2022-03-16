@@ -15,7 +15,7 @@ export default class WebSocket {
     handleConnection = async (client: Websocket, request: IncomingMessage) => {
 
         const playerList    = Object.keys(ForestBot.Bot.bot.players);
-        const uniquePlayers = ForestBot.Database.getUniquePlayerCount() || 0;
+        const uniquePlayers = ForestBot.Database.getUniquePlayerCount()[0].count || 0;
         const pListExtra    = [];
 
         await new Promise(resolve => {
