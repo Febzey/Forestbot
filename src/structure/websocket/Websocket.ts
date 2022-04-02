@@ -10,12 +10,14 @@ export default class WebSocket {
         this.wss = new WebSocketServer(options);
         this.wss.on("connection", this.handleConnection);
         this.wss.on("error", this.handleError);
+
     }
 
+    
     handleConnection = async (client: Websocket, request: IncomingMessage) => {
 
         const playerList    = Object.keys(ForestBot.Bot.bot.players);
-        const uniquePlayers = ForestBot.Database.getUniquePlayerCount()[0].count || 0;
+        const uniquePlayers = await ForestBot.Database.getUniquePlayerCount();
         const pListExtra    = [];
 
         await new Promise(resolve => {
@@ -33,7 +35,7 @@ export default class WebSocket {
         const load = JSON.stringify({
             playerlist:      playerList,
             playerListExtra: pListExtra,
-            uniquePlayers:   uniquePlayers
+            uniquePlayers:   uniquePlayers[0].cnt
         })
 
         client.send(load);
