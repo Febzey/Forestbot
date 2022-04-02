@@ -1,6 +1,6 @@
 import { Client, ColorResolvable }                from 'discord.js';
 import { config }                                 from '../../index.js';
-import type ForestBot                             from '../ForestBot.js';
+import ForestBot                             from '../ForestBot.js';
 import type { TextChannel, Interaction, Message } from 'discord.js';
 
 const spam = new Map();
@@ -20,7 +20,15 @@ export default class DClient extends Client {
     handleMessage = async (message: Message) => {
         const { author, member, channel, content } = message;
         if (author.id === this.user.id || !this.chatChannels.has(channel.id) || /§/.test(content)) return;
-    
+        
+        if (
+            this.ForestBot.config.config.discord_whitelist.includes(author.id)
+            && content === "!restart"    
+        ) {
+            message.reply("Restarting...");
+            return process.exit(1);
+        }
+
         if (!spam.has(author.id)) spam.set(author.id, { messageCount: 1 })
 
         const spamUser = spam.get(author.id);
