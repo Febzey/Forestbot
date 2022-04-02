@@ -70,7 +70,6 @@ export default class DClient extends Client {
                 })
             }
             await interaction.reply({ content: "> Attempting to restart..." });
-            await this.ForestBot.time.sleep(this.ForestBot.config.config.reconnect_time)
             process.exit(0);
         }
         return;

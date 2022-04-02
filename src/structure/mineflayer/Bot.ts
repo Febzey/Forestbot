@@ -12,6 +12,8 @@ export default class Bot {
     public commandMap =  new Map();
     public botOptions:   botOptions;
     public whitelist:    Array<string>
+    
+    public loginAttempts: number = 0;
 
     constructor(public ForestBot: ForestBot) {
         this.fetchUser  = fetchUser;
@@ -19,11 +21,15 @@ export default class Bot {
         this.whitelist  = ForestBot.config.config.mc_whitelist
     }
 
-    Login = async () => {        
-        const data = await ping(this.botOptions.host, this.botOptions.port).catch(() => { });
-        if (!data) return new Promise(() => {
-            this.ForestBot.Logger.serverUnreachable(this.ForestBot.DClient);
-        });
+    Login = async () => {     
+        try {
+            await this.PingServer();
+        }
+        catch (err) {
+            this.ForestBot.Logger.error(err);
+            await this.ForestBot.time.sleep(this.ForestBot.config.config.reconnect_time);
+            return this.Login();
+        }
 
         this.bot = createBot(this.botOptions) as IForestbot;
         this.LoadPatterns();
@@ -31,6 +37,20 @@ export default class Bot {
         this.HandleCommands();
         setInterval(() => { this.advertise() }, 45 * 60000)
         setInterval(() => { this.savePlaytime() }, 60000)
+    }
+
+    PingServer = () => {
+        this.loginAttempts++;
+        if (this.loginAttempts > 5) { 
+            return new Promise(() => {
+                this.ForestBot.Logger.serverUnreachable(this.ForestBot.DClient);
+            })
+        }
+        return new Promise(async (resolve, reject) => {
+            const data = await ping(this.botOptions.host, this.botOptions.port).catch(() => {})
+            if (!data) return reject("Connection to minecraft server has failed");
+            resolve(data);
+        })
     }
 
     HandleEvents = async () => {
