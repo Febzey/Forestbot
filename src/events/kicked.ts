@@ -7,7 +7,8 @@ export default {
         Bot.ForestBot.DClient.chatEmbed(`**Kicked from server.** \`Reason:\` ${content}\n> Reconnecting in: ${Bot.ForestBot.config.config.reconnect_time / 1000} seconds.`, Bot.ForestBot.DClient.colors.orange)
         Bot.ForestBot.Logger.kicked();
 
-        await Bot.ForestBot.time.sleep(Bot.ForestBot.config.config.reconnect_time);
-        process.exit(0);
+        setTimeout(() => {
+            process.exit(1);
+        }, Bot.ForestBot.config.config.reconnect_time)
     }
 };

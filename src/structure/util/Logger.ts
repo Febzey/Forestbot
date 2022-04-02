@@ -10,6 +10,7 @@ export default class Logger {
     discordReady       = () => console.info(chalk.green("Discord bot ready."))
     mineflayerReady    = () => console.info(chalk.green("Mineflayer bot ready."))
     kicked             = () => console.error(chalk.red("Kicked from server."))
+    error              = (err: any) => console.error(chalk.red("Bot Error: " + err))
 
     serverUnreachable = async (client: DForestBot) => {
         const channel = await client.channels.fetch(config.config.main_channel);
