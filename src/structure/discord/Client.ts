@@ -25,7 +25,7 @@ export default class DClient extends Client {
             this.ForestBot.config.config.discord_whitelist.includes(author.id)
             && content === "!restart"    
         ) {
-            message.reply("Restarting...");
+            await message.reply("Restarting...");
             return process.exit(1);
         }
 
