@@ -41,7 +41,7 @@ export default class Bot {
 
     PingServer = () => {
         this.loginAttempts++;
-        if (this.loginAttempts > 5) { 
+        if (this.loginAttempts >= 5) { 
             return new Promise(() => {
                 this.ForestBot.Logger.serverUnreachable(this.ForestBot.DClient);
             })
