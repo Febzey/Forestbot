@@ -8,7 +8,18 @@ export default {
         const contentArray: string[] = content.toString().split(" ");
         const victim:         string = contentArray[0];
 
-        Bot.ForestBot.Database.updatePveKill([victim, content.toString(), Date.now(), victim],)
+        Bot.ForestBot.Database.updatePveKill(
+            [
+                victim, 
+                Bot.ForestBot.Database.mc_server,
+                content.toString(), 
+                Date.now(), 
+                victim,
+                Bot.ForestBot.Database.mc_server
+            ],
+        )
+
+        console.log(Bot.ForestBot.Database.mc_server)
         
         return Bot.ForestBot.DClient.chatEmbed(`${content.toString()}`, Bot.ForestBot.DClient.colors.purple);
     }

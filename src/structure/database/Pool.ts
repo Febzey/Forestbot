@@ -4,13 +4,15 @@ import type { Pool }          from 'mysql';
 import type ForestBot         from '../ForestBot';
 
 export default class Database {
-    public Pool: Pool;
-    public channels: Set<string> = new Set();
-    public useDatabase: boolean;
+    public Pool:          Pool;
+    public channels:      Set<string> = new Set();
+    public useDatabase:   boolean;
     public promisedQuery: any;
+    public mc_server:     string;
 
     constructor(public ForestBot: ForestBot) {
         this.useDatabase = ForestBot.config.config.use_database;
+        this.mc_server =   ForestBot.config.config.mc_server;
         this.createPool();
     }
 
@@ -27,7 +29,7 @@ export default class Database {
     saveChat(argArray: any[]) {
         if (!this.useDatabase) return;
         this.Pool.query(
-            "INSERT INTO messages (name, message, date) VALUES(?,?,?);",
+            "INSERT INTO messages (name, message, date, mc_server) VALUES(?,?,?,?);",
             argArray
         )
     }
@@ -35,7 +37,7 @@ export default class Database {
     insertUser(argsArray: any[]) {
         if (!this.useDatabase) return;
         this.Pool.query(
-            `INSERT INTO users(username,joindate,uuid,joins) VALUES (?,?,?,?)`,
+            `INSERT INTO users(username, joindate, uuid, joins, mc_server) VALUES (?,?,?,?,?)`,
             argsArray,
             (err) => {
                 if (err) return;
@@ -46,8 +48,8 @@ export default class Database {
     checkUser(args: any) {
         if (!this.useDatabase) return;
         this.Pool.query(
-            "SELECT username, uuid FROM users WHERE uuid = ?",
-            [args.uuid],
+            "SELECT username, uuid FROM users WHERE uuid = ? AND mc_server = ?",
+            [args.uuid, this.mc_server],
             (err, result) => {
                 if (err) return;
                 if (!result.length) {
@@ -55,7 +57,8 @@ export default class Database {
                         args.username,
                         this.ForestBot.time.dateTime(),
                         args.uuid,
-                        1
+                        1,
+                        this.mc_server
                     ])
                     if (this.ForestBot.config.config.welcome_messages) {
                         this.ForestBot.Bot.bot.chat(`${args.username} joined for the first time.`)   
@@ -68,15 +71,15 @@ export default class Database {
 
                 if (args.uuid === uuid && args.username !== user) {
                     this.Pool.query(
-                        "UPDATE users SET username = ? WHERE username = ? AND uuid = ?",
-                        [args.username, user, uuid]
+                        "UPDATE users SET username = ? WHERE username = ? AND uuid = ? AND mc_server = ?",
+                        [args.username, user, uuid, this.mc_server]
                     );
                     return this.ForestBot.Bot.bot.chat(`${args.username}, previously known as ${user} joined the server.`)
                 }
 
                 this.Pool.query(
-                    "UPDATE users SET joins = joins + 1, lastseen = ? WHERE username = ?",
-                    [this.ForestBot.time.dateTime(), args.username]
+                    "UPDATE users SET joins = joins + 1, lastseen = ? WHERE username = ? AND mc_server = ?",
+                    [this.ForestBot.time.dateTime(), args.username, this.mc_server]
                 )
 
             }
@@ -86,7 +89,7 @@ export default class Database {
     updateUserLeave(argsArray: any[]) {
         if (!this.useDatabase) return;
         this.Pool.query(
-            "UPDATE users SET leaves = leaves + 1, lastseen = ? WHERE uuid = ?",
+            "UPDATE users SET leaves = leaves + 1, lastseen = ? WHERE uuid = ? AND mc_server = ?",
             argsArray
         )
     }
@@ -95,8 +98,8 @@ export default class Database {
         if (!this.useDatabase) return;
         this.Pool.query(
             `
-            UPDATE users SET deaths = deaths + 1 WHERE username = ?;
-            UPDATE users SET lastdeathString = ?, lastdeathTime = ? WHERE username = ?;
+            UPDATE users SET deaths = deaths + 1 WHERE username = ? AND mc_server = ?;
+            UPDATE users SET lastdeathString = ?, lastdeathTime = ? WHERE username = ? AND mc_server = ?;
             `,
             argsArray
         )
@@ -106,9 +109,9 @@ export default class Database {
         if (!this.useDatabase) return;
         this.Pool.query(
             `
-            UPDATE users SET deaths = deaths + 1 WHERE username = ?;
-            UPDATE users SET kills = kills + 1 WHERE username = ?;
-            UPDATE users SET lastdeathString = ?, lastdeathTime = ? WHERE username = ?;
+            UPDATE users SET deaths = deaths + 1 WHERE username = ? AND mc_server = ?;
+            UPDATE users SET kills = kills + 1 WHERE username = ? AND mc_server = ?;
+            UPDATE users SET lastdeathString = ?, lastdeathTime = ? WHERE username = ? AND mc_server = ?;
             `,
             argsArray
         )
@@ -117,19 +120,19 @@ export default class Database {
     updatePlaytime(argsArray: any[]) {
         if (!this.useDatabase) return;
         this.Pool.query(
-            "UPDATE users SET playtime = playtime + 60000 WHERE username = ?",
+            "UPDATE users SET playtime = playtime + 60000 WHERE username = ? AND mc_server = ?",
             argsArray
         )
     }
 
     async getChannels() {
         if (!this.useDatabase) return;
-        const results = await this.promisedQuery("SELECT channelID FROM livechats");
+        const results = await this.promisedQuery("SELECT channelID FROM livechats WHERE mc_server = ?", [this.mc_server]);
         return results;
     }
 
     async getUniquePlayerCount() {
-        const u = await this.promisedQuery("SELECT COUNT(*) as cnt FROM users")
+        const u = await this.promisedQuery("SELECT COUNT(*) as cnt FROM users WHERE mc_server = ?", [this.mc_server]);
         return u;
     }
 

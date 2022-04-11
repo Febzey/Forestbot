@@ -87,7 +87,12 @@ export default class Bot {
     savePlaytime = () => {
         if (!this.bot.players) return;
         Object.keys(this.bot.players).forEach(player => {
-            this.ForestBot.Database.updatePlaytime([player]);
+            this.ForestBot.Database.updatePlaytime(
+                [
+                    player,
+                    this.ForestBot.Database.mc_server,
+                ]
+            );
         })
     }
 

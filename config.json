@@ -6,7 +6,7 @@
     "mc_whitelist": ["Furia", "notFebzey", "Positrox"],
 
     "api_url": "https://forestbot.org",
-    "server": "newtest",
+    "mc_server": "newtest",
 
     "reconnect_time": 36000,
     "welcome_messages": true,

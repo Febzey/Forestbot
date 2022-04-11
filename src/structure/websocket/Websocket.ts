@@ -13,7 +13,6 @@ export default class WebSocket {
 
     }
 
-    
     handleConnection = async (client: Websocket, request: IncomingMessage) => {
 
         const playerList    = Object.keys(ForestBot.Bot.bot.players);

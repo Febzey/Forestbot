@@ -12,8 +12,8 @@ export default {
         Bot.ForestBot.DClient.chatEmbed(`[+] ${player.username}`, Bot.ForestBot.DClient.colors.green)
 
         Bot.ForestBot.Database.checkUser({
-            username: player.username,
-            uuid:     player.uuid,  
+            username:  player.username,
+            uuid:      player.uuid
         })
 
     }

@@ -13,7 +13,14 @@ export default {
         const message  = content[0][1];
 
         Bot.ForestBot.DClient.chatEmbed(`**${username}** » ${message}`, Bot.ForestBot.DClient.colors.gray)
-        Bot.ForestBot.Database.saveChat([username, message, `${Date.now()}`])
+        Bot.ForestBot.Database.saveChat(
+            [
+                username, 
+                message, 
+                `${Date.now()}`, 
+                Bot.ForestBot.Database.mc_server
+            ]
+        )
 
         if (Bot.ForestBot.config.config.websocket_livechat) {
             try {
