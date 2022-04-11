@@ -48,9 +48,10 @@ export default class Database {
     checkUser(args: any) {
         if (!this.useDatabase) return;
         this.Pool.query(
-            "SELECT username, uuid FROM users WHERE uuid = ? AND mc_server = ?",
+            "SELECT username, uuid, mc_server FROM users WHERE uuid = ? AND mc_server = ?",
             [args.uuid, this.mc_server],
             (err, result) => {
+                console.log(result)
                 if (err) return;
                 if (!result.length) {
                     this.insertUser([
