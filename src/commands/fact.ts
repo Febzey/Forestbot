@@ -31,7 +31,7 @@ export default {
             )
         }
 
-        if (args[1] !== 'id') {
+        if (args[1] === 'id') {
             if (!args[2]) return bot.bot.whisper(user, 'You must provide a fact ID.')
             const id = args[2]
             if (isNaN(id)) return bot.bot.whisper(user, 'You must provide a valid fact ID.')

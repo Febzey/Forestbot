@@ -29,6 +29,11 @@ export default class DClient extends Client {
             return process.exit(1);
         }
 
+        if (content.includes("\n") || content.length > 240) {
+            await message.reply("Please don't send messages with line breaks or over 300 characters.");
+            return;
+        }
+
         if (!spam.has(author.id)) spam.set(author.id, { messageCount: 1 })
 
         const spamUser = spam.get(author.id);
