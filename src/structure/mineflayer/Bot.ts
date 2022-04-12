@@ -35,7 +35,9 @@ export default class Bot {
         this.LoadPatterns();
         this.HandleEvents();
         this.HandleCommands();
-        setInterval(() => { this.advertise() }, 45 * 60000)
+        if (this.ForestBot.config.config.advertise) {
+            setInterval(() => { this.advertise() }, 45 * 60000)
+        }
         setInterval(() => { this.savePlaytime() }, 60000)
     }
 

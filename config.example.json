@@ -8,6 +8,8 @@
     "disableAllCommands": false,
     "disabled_commands": ["top"],
 
+    "advertise": false,
+
     "api_url": "https://forestbot.org",
     "mc_server": "newtest",
 
