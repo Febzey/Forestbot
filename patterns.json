@@ -7,6 +7,16 @@
         },
         {
             "name": "whisperTo",
+            "regex": "^\\[MSG\\] me -> ([^ ]*): (.*)$",
+            "options": { "parse": true, "repeat": true }
+        },
+        {
+            "name": "whisperFrom",
+            "regex": "^\\[MSG\\] ([^ ]*) -> me: (.*)$",
+            "options": { "parse": true, "repeat": true }
+        },
+        {
+            "name": "whisperTo",
             "regex": "^You whisper to ([^ ]*): (.*)$",
             "options": { "parse": true, "repeat": true }
         },

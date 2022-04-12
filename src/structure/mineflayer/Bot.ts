@@ -33,6 +33,10 @@ export default class Bot {
 
         this.bot = createBot(this.botOptions) as IForestbot;
         this.LoadPatterns();
+        this.bot.whisper = (username: string, message: string) => {
+            console.log("Whispered" + username + " message" + message)
+            this.bot.chat(`/w ${username} ${message}`);
+        }
         this.HandleEvents();
         this.HandleCommands();
         if (this.ForestBot.config.config.advertise) {
