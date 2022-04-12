@@ -8,5 +8,3 @@ export * as Logger   from './structure/util/Logger.js';
 export * as Ws       from './structure/websocket/Websocket.js';
 
 export default new ForestBot(); 
-
-//TODO! add a feature to disable commands from the config.json file, or disable them all completely
