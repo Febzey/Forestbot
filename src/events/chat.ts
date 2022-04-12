@@ -37,6 +37,9 @@ export default {
 
         for (const [key, value] of Bot.commandMap) {
             for (const alias of value.commands) {
+                if (Bot.ForestBot.config.config.disabled_commands.includes(`${prefix}${alias}`)) {
+                    return Bot.bot.whisper(username,`the "${prefix}${alias}" command is currently disabled.`);
+                }
                 if (message.toLowerCase().startsWith(`${prefix}${alias}`)) {
                     if (spam.has(username)) {
                         return Bot.bot.whisper(username, "[Anti-Spam] Please wait 3 seconds.")

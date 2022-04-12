@@ -13,4 +13,5 @@ Check your ping or another players with !ping
 Add a fact with !fact add
 Get a random fact with !fact
 Check total facts with !fact total
+Get a specific fact with !fact id <id number>
 See when a player last died with !lastdeath
