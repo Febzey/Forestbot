@@ -5,7 +5,8 @@
     "use_whitelist": false,
     "mc_whitelist": ["Furia", "notFebzey", "Positrox"],
 
-    "disabled_commands": ["!top"],
+    "disableAllCommands": false,
+    "disabled_commands": ["top"],
 
     "api_url": "https://forestbot.org",
     "mc_server": "newtest",
