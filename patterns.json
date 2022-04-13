@@ -112,6 +112,11 @@
         },
         {
             "name": "chat",
+            "regex": "^\\[Discord\\] ([^ ]*)» (.*)$",
+            "options": { "parse": true, "repeat": true }
+        },
+        {
+            "name": "chat",
             "regex": "^\\[YouTube\\] ([^ ]*) » (.*)$",
             "options": { "parse": true, "repeat": true }
         },
