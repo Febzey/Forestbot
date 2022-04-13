@@ -26,5 +26,5 @@ export const dhms = (time: number | string) => {
     (d = Math.floor(time / (1000 * 60 * 60 * 24))),
     (h = Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))),
     (m = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60)));
-    return `${d} Days(s) ${h} hours ${m} minutes.`;
+    return `${d} Day(s) ${h} hours ${m} minutes.`;
 };

@@ -2,7 +2,6 @@ import type Bot from '../structure/mineflayer/Bot.js';
 import ud       from 'urban-dictionary';
 
 export default {
-    commandID: 10,
     commands: ['urban'],
     minArgs: 0,
     maxArgs: 1,

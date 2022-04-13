@@ -2,7 +2,8 @@ import type { BotEvents } from 'mineflayer';
 import type Bot           from '../structure/mineflayer/Bot.js';
 
 const prefix = "!";
-const spam   = new Set();
+const spam: Map<string, number> = new Map();
+const blacklistedUsers: Set<string> = new Set();
 
 export default { 
     name: "chat:chat",
@@ -35,9 +36,14 @@ export default {
             } catch { };
         }
 
+        let spam_cooldown: number = Bot.ForestBot.config.config.spam_cooldown
+        let spam_limit: number = Bot.ForestBot.config.config.spam_limit
+
         for (const [key, value] of Bot.commandMap) {
             for (const alias of value.commands) {
                 if (message.toLowerCase().startsWith(`${prefix}${alias}`)) {
+                    if (blacklistedUsers.has(username)) return;
+
                     if (Bot.ForestBot.config.config.disabled_commands.includes(`${alias}`)) {
                         return Bot.bot.whisper(username,`the "${prefix}${alias}" command is currently disabled.`);
                     }
@@ -45,13 +51,23 @@ export default {
                     if (Bot.ForestBot.config.config.disableAllCommands) {
                         return Bot.bot.whisper(username, `Commands are currently disabled within this server.`);
                     }
+                     
                     if (spam.has(username)) {
-                        return Bot.bot.whisper(username, "[Anti-Spam] Please wait 3 seconds.")
+                        let spamCount = spam.get(username);
+                        if (spamCount === 1) Bot.bot.whisper(username, `[Anti-Spam] Please wait ${spam_cooldown / 1000} seconds.`)
+                        if (spamCount >= spam_limit) {
+                            blacklistedUsers.add(username);
+                            Bot.bot.whisper(username, `[Anti-Spam] You have been blacklisted for spamming, if this was an error, please contact Febzey#1854.`)
+                        }
+                        spam.set(username, spamCount + 1);
+                        return setTimeout(async () => { spam.delete(username) }, spam_cooldown)
+                    } 
+                    
+                    else {
+                        spam.set(username, 1);
                     }
-                    spam.add(username);
-                    const command = Bot.commandMap.get(key);
-                    command.execute(username, message.split(" "), Bot);
-                    return setTimeout(() => { spam.delete(username) }, 4000)
+
+                    return Bot.commandMap.get(key).execute(username, message.split(" "), Bot);
                 }
             }
         }

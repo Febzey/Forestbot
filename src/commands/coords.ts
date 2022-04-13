@@ -1,7 +1,6 @@
 import type Bot from '../structure/mineflayer/Bot.js';
 
 export default {
-    commandID: 14,
     commands: ['coords'],
     minArgs: 0,
     maxArgs: 1,

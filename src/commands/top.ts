@@ -2,7 +2,6 @@ import { promisify } from 'util';
 import type Bot from '../structure/mineflayer/Bot.js';
 
 export default {
-    commandID: 17,
     commands: ['top'],
     minArgs: 0,
     maxArgs: 2,

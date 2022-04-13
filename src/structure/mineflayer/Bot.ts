@@ -71,7 +71,7 @@ export default class Bot {
         const commandFiles = (await readdir('./build/commands')).filter(file => file.endsWith('.js'));        
         for (const File of commandFiles) {
             const Module = await import(`../../commands/${File}`);
-            this.commandMap.set(Module.default.commandID, Module.default);
+            this.commandMap.set(Module.default.commands[0], Module.default);
         }
     }
 

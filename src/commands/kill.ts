@@ -28,7 +28,6 @@ let deathQuotes =
 
 
 export default {
-    commandID: 15,
     commands: ['kill'],
     minArgs: 0,
     maxArgs: 1,

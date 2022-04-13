@@ -2,7 +2,6 @@ import type Bot       from '../structure/mineflayer/Bot.js';
 import { timeAgoStr } from '../util/time/convert.js';
 
 export default {
-    commandID: 7,
     commands: ['lastdeath'],
     minArgs: 0,
     maxArgs: 1,

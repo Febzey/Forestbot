@@ -16,6 +16,10 @@
     "reconnect_time": 36000,
     "welcome_messages": true,
 
+    "spam_cooldown": 5000,
+    "auto_mute_time": 10,
+    "spam_limit": 6,
+
     "use_database": true,
     "use_discord": true,
 

@@ -1,7 +1,6 @@
 import type Bot from '../structure/mineflayer/Bot.js';
 
 export default {
-    commandID: 5,
     commands: ['wp', 'worstping'],
     minArgs: 0,
     maxArgs: 1,

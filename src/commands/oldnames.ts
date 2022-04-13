@@ -2,7 +2,6 @@ import type Bot  from '../structure/mineflayer/Bot.js';
 import MojangAPI from 'mojang-api';
 
 export default {
-    commandID: 12,
     commands: ['oldnames'],
     minArgs: 0,
     maxArgs: 1,

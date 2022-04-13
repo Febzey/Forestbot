@@ -1,7 +1,6 @@
 import type Bot from '../structure/mineflayer/Bot.js';
 
 export default {
-    commandID: 16,
     commands: ['fact'],
     minArgs: 0,
     maxArgs: 40,
@@ -9,9 +8,8 @@ export default {
         const db = bot.ForestBot.Database.Pool
 
         if (args[1] === 'add') {
-            console.log("addinggg")
             if (!args[2]) return bot.bot.whisper(user, 'You must provide a fact to add.')
-            const fact = args.slice(1).join(' ')
+            const fact = args.slice(2).join(' ')
             db.query(
                 "INSERT INTO facts (username,fact,date) VALUES (?,?,?)",
                 [user, fact, Date.now()],
@@ -26,7 +24,7 @@ export default {
                 "SELECT * FROM facts ORDER BY RAND() LIMIT 1",
                 (err, result) => {
                     if (err) return bot.bot.whisper(user, 'Something went wrong.')
-                    return bot.bot.chat(result[0].fact + " | ID: " + result[0].id)    
+                    return bot.bot.chat("Fact: " + result[0].fact + " | ID: " + result[0].id)    
                 }
             )
         }
@@ -41,7 +39,18 @@ export default {
                 [id],
                 (err, result) => {
                     if (err) return bot.bot.whisper(user, 'Something went wrong.')
-                    return bot.bot.chat(result[0].fact + " | ID: " + result[0].id)    
+                    return bot.bot.chat("Fact: " + result[0].fact + " | ID: " + result[0].id)    
+                }
+            )
+        }
+
+        //check if command is fact total
+        if (args[1] === 'total') {
+            db.query(
+                "SELECT COUNT(*) AS total FROM facts",
+                (err, result) => {
+                    if (err) return bot.bot.whisper(user, 'Something went wrong.')
+                    return bot.bot.chat("Total Facts: " + result[0].total)    
                 }
             )
         }
