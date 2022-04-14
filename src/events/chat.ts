@@ -58,8 +58,6 @@ export default {
                     const spamUser = spam.get(username);
                     spam.set(username, spamUser + 1);
 
-                    console.log(spamUser)
-
                     if (spamUser === 2) {
                         Bot.bot.whisper(username, `Please wait ${spam_cooldown / 1000} seconds before sending another command.`);
                         await Bot.ForestBot.time.sleep(spam_cooldown)
