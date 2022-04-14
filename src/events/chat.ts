@@ -60,9 +60,6 @@ export default {
 
                     if (spamUser === 2) {
                         Bot.bot.whisper(username, `Please wait ${spam_cooldown / 1000} seconds before sending another command.`);
-                        await Bot.ForestBot.time.sleep(spam_cooldown)
-                        spam.delete(username);
-                        return
                     }
                     else if (spamUser === spam_limit) {
                         Bot.blacklist.push(username);
@@ -74,7 +71,9 @@ export default {
                         Bot.commandMap.get(key).execute(username, message.split(" "), Bot);
                     }
 
-                    return;
+                    await Bot.ForestBot.time.sleep(spam_cooldown)
+                    spam.delete(username);
+                    return
                 }
             }
         }
