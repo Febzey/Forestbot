@@ -18,8 +18,6 @@ export default {
                 Bot.ForestBot.Database.mc_server
             ],
         )
-
-        console.log(Bot.ForestBot.Database.mc_server)
         
         return Bot.ForestBot.DClient.chatEmbed(`${content.toString()}`, Bot.ForestBot.DClient.colors.purple);
     }

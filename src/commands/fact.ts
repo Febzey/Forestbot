@@ -33,7 +33,6 @@ export default {
             if (!args[2]) return bot.bot.whisper(user, 'You must provide a fact ID.')
             const id = args[2]
             if (isNaN(id)) return bot.bot.whisper(user, 'You must provide a valid fact ID.')
-
             db.query(
                 "SELECT * FROM facts WHERE id = ?",
                 [id],
@@ -44,7 +43,6 @@ export default {
             )
         }
 
-        //check if command is fact total
         if (args[1] === 'total') {
             db.query(
                 "SELECT COUNT(*) AS total FROM facts",

@@ -12,6 +12,7 @@ export default class Bot {
     public commandMap =  new Map();
     public botOptions:   botOptions;
     public whitelist:    Array<string>
+    public blacklist:    Array<string>
     
     public loginAttempts: number = 0;
 
@@ -19,6 +20,7 @@ export default class Bot {
         this.fetchUser  = fetchUser;
         this.botOptions = new ForestBot.config.botOptions();
         this.whitelist  = ForestBot.config.config.mc_whitelist
+        this.blacklist  = ForestBot.config.config.mc_blacklist
     }
 
     Login = async () => {     

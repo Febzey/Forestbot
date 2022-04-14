@@ -51,7 +51,6 @@ export default class Database {
             "SELECT username, uuid, mc_server FROM users WHERE uuid = ? AND mc_server = ?",
             [args.uuid, this.mc_server],
             (err, result) => {
-                console.log(result)
                 if (err) return;
                 if (!result.length) {
                     this.insertUser([
