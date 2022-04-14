@@ -26,7 +26,7 @@ export default class Logger {
                                 style: 2,
                                 label: "Reconnect",
                                 //@ts-ignore
-                                custom_id: `${process.env.DATABASE}`,
+                                custom_id: `${config.config.mc_server}`,
                             },
                         ],
                     },

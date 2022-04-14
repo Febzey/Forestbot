@@ -67,7 +67,7 @@ export default class DClient extends Client {
 
     handleInteraction = async (interaction: Interaction) => {
         if (!interaction.isButton()) return;
-        if (interaction.customId === process.env.DATABASE) {
+        if (interaction.customId === config.config.mc_server) {
             if (!config.config.discord_whitelist.includes(interaction.user.id)) {
                 return await interaction.reply({
                     content: "> You cannot use this button, But you can request permission for it.",

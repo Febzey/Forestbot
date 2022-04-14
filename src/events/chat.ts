@@ -40,34 +40,6 @@ export default {
         }
 
 
-        // async function removeRatelimit(username: string) {
-        //     return new Promise<void>(async (resolve, reject) => {
-        //         await Bot.ForestBot.time.sleep(3000000);
-        //         spam.delete(username);
-        //         resolve();
-        //     })
-        // }
-
-        // async function antiSpam(username: string, bot: bot): Promise<boolean> {
-        //     if (!spam.has(username)) {
-        //         spam.set(username, 0);
-        //     }
-
-        //     const spamUser = spam.get(username);
-        //     spam.set(username, spamUser + 1);
-
-        //     console.log(spamUser)
-
-        //     if (spamUser > 1) {
-        //         Bot.bot.whisper(username, `[Anti-Spam] Please wait ${spam_cooldown / 1000} seconds before sending another command.`)
-        //         await removeRatelimit(username);
-        //         return false;
-        //     }
-
-        //     return false
-
-        // }
-
         for (const [key, value] of Bot.commandMap) {
             for (const alias of value.commands) {
                 if (message.toLowerCase().startsWith(`${prefix}${alias}`)) {
@@ -88,7 +60,12 @@ export default {
 
                     console.log(spamUser)
 
-                    if (spamUser === 2) return Bot.bot.whisper(username, `Please wait ${spam_cooldown / 1000} seconds before sending another command.`);
+                    if (spamUser === 2) {
+                        Bot.bot.whisper(username, `Please wait ${spam_cooldown / 1000} seconds before sending another command.`);
+                        await Bot.ForestBot.time.sleep(spam_cooldown)
+                        spam.delete(username);
+                        return
+                    }
                     else if (spamUser === spam_limit) {
                         Bot.blacklist.push(username);
                         return Bot.bot.whisper(username, "You are now blacklisted for spamming commands.");
@@ -99,13 +76,7 @@ export default {
                         Bot.commandMap.get(key).execute(username, message.split(" "), Bot);
                     }
 
-                    //remove the user from the spam map after 5 seconds
-                    await Bot.ForestBot.time.sleep(spam_cooldown)
-                    spam.delete(username);
-                    console.log("User can now do commands, cooldown removed")
-
                     return;
-                    // return setTimeout(() => {   }, spam_cooldown);
                 }
             }
         }
