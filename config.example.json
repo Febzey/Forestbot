@@ -7,7 +7,7 @@
     "mc_blacklist": [],
 
     "disableAllCommands": false,
-    "disabled_commands": ["top"],
+    "disabled_commands": [],
 
     "advertise": false,
 
