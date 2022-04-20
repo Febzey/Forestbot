@@ -10,6 +10,8 @@ export default {
         const data = await bot.fetchUser(search, "joins");
         if (!data) return bot.bot.whisper(user, "User not found.")
 
-        return bot.bot.chat(`${search}: ${data.joins} times`)
+        return !args[1]
+            ? bot.bot.whisper(user, `${data.joins} times`)
+            : bot.bot.chat(`${search}: ${data.joins} times`)
     }
- }
+}

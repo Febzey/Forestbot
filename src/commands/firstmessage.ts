@@ -11,7 +11,10 @@ export default {
         if (!data) return  bot.bot.whisper(user, "User not found.")
 
         const date = bot.ForestBot.time.timeAgoStr(parseInt(data.date));
-    
-        return bot.bot.chat(`${search}: ${data.message}, ${date}`);
+
+        return !args[1]
+        ? bot.bot.whisper(user, `${data.message}, ${date}`)
+        : bot.bot.chat(`${search}: ${data.message}, ${date}`)
+
     }
  }

@@ -1,4 +1,4 @@
-import type Bot  from '../structure/mineflayer/Bot.js';
+import type Bot from '../structure/mineflayer/Bot.js';
 import MojangAPI from 'mojang-api';
 
 export default {
@@ -14,9 +14,11 @@ export default {
                 if (err) return console.error(err);
                 if (!res[1]) return bot.bot.whisper(user, "This user has never changed their name.");
                 const mapped = res.map((element: any) => `${element.name}`).join(", ");
-                return bot.bot.chat(`Oldnames for [${search}]: ${mapped}`);
+                return !args[1]
+                    ? bot.bot.whisper(user, ` ${mapped}`)
+                    : bot.bot.chat(`Oldnames for [${search}]: ${mapped}`);
             });
         });
         return;
     }
- }
+}

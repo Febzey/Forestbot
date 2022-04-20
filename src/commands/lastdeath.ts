@@ -1,4 +1,4 @@
-import type Bot       from '../structure/mineflayer/Bot.js';
+import type Bot from '../structure/mineflayer/Bot.js';
 import { timeAgoStr } from '../util/time/convert.js';
 
 export default {
@@ -11,6 +11,9 @@ export default {
         const data = await bot.fetchUser(search, "lastdeath");
         if (!data) return bot.bot.whisper(user, "User not found.")
 
-        return bot.bot.chat(`${data.death}, ${timeAgoStr(data.time)}`)
+        return !args[1]
+            ? bot.bot.whisper(user, `${data.death}, ${timeAgoStr(data.time)}`)
+            : bot.bot.chat(`${data.death}, ${timeAgoStr(data.time)}`)
+
     }
- }
+}

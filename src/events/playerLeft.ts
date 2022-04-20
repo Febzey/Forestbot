@@ -9,7 +9,7 @@ export default {
         
         Bot.ForestBot.Database.updateUserLeave(
             [
-                Bot.ForestBot.time.dateTime(), 
+                `${Date.now()}`, 
                 player.uuid,
                 Bot.ForestBot.Database.mc_server
             ])

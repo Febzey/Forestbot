@@ -45,7 +45,7 @@ export default {
                 if (message.toLowerCase().startsWith(`${prefix}${alias}`)) {
                     if (Bot.blacklist.includes(username)) return;
 
-                    if (Bot.ForestBot.config.config.disabled_commands.includes(`${alias}`)) {
+                    if (Bot.ForestBot.config.config.disabled_commands.includes(`${key}`)) {
                         return Bot.bot.whisper(username, `the "${prefix}${alias}" command is currently disabled.`);
                     }
 
@@ -65,14 +65,13 @@ export default {
                         Bot.blacklist.push(username);
                         return Bot.bot.whisper(username, "You are now blacklisted for spamming commands.");
                     }
-
-                                
+     
                     if (spamUser === 1) {
                         Bot.commandMap.get(key).execute(username, message.split(" "), Bot);
+                        await Bot.ForestBot.time.sleep(spam_cooldown)
+                        spam.delete(username);
                     }
 
-                    await Bot.ForestBot.time.sleep(spam_cooldown)
-                    spam.delete(username);
                     return
                 }
             }

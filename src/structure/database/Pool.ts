@@ -16,6 +16,7 @@ export default class Database {
         this.createPool();
     }
 
+
     createPool() {
         if (!this.useDatabase) return;
         this.Pool = createPool(new this.ForestBot.config.poolOptions()); 
@@ -79,7 +80,7 @@ export default class Database {
 
                 this.Pool.query(
                     "UPDATE users SET joins = joins + 1, lastseen = ? WHERE username = ? AND mc_server = ?",
-                    [this.ForestBot.time.dateTime(), args.username, this.mc_server]
+                    [`${Date.now()}`, args.username, this.mc_server]
                 )
 
             }

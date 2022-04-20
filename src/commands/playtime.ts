@@ -12,6 +12,10 @@ export default {
         if (!data) return bot.bot.whisper(user, "User not found.")
 
         const playtime = time.dhms(data.playtime);
-        return bot.bot.chat(`${search}: ${playtime}`)
+
+        return !args[1]
+            ? bot.bot.whisper(user, "Your playtime is: " + time.dhms(data.playtime))
+            : bot.bot.chat(`${search}: ${playtime}`)
+
     }
- }
+}

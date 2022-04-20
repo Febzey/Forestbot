@@ -34,7 +34,7 @@ export default {
     execute: async (user: string, args: any[], bot: Bot) => {
         if (bot.ForestBot.config.config.use_whitelist && !bot.whitelist.includes(user)) return;
         let r = deathQuotes[Math.floor(Math.random() * deathQuotes.length)];
-        bot.bot.chat(r);
+        //bot.bot.chat(r);
         await time.sleep(1000);
         return bot.bot.chat('/suicide');
     }

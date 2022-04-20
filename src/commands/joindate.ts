@@ -8,8 +8,10 @@ export default {
         const search = args[1] ? args[1] : user;
 
         const data = await bot.fetchUser(search, "joindate");
-        if (!data) return  bot.bot.whisper(user, "User not found.")
-    
-        return bot.bot.chat(`${search}: ${data.joindate}`);
+        if (!data) return bot.bot.whisper(user, "User not found.")
+
+        return !args[1]
+            ? bot.bot.whisper(user, `${data.joindate}`)
+            : bot.bot.chat(`${search}: ${data.joindate}`);
     }
- }
+}
