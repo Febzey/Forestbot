@@ -51,26 +51,24 @@ export default class DClient extends Client {
             return;
         }
 
-        if (!spam.has(author.id)) spam.set(author.id, { messageCount: 0 })
+        if (!spam.has(author.id)) {
+            spam.set(author.id, 1)
+        }
 
         const spamUser = spam.get(author.id);
+        spam.set(author.id, spamUser + 1)
 
-        spam.set(author.id, { messageCount: spamUser.messageCount + 1 })
 
-
-        if (spamUser.messageCount === 2) {
-            member.send(`You may only send message once every **10 seconds**, If you're trying to contact a user, consider using the \`/w | /whisper\` command to whisper them.`).catch(() => { });
+        if (spamUser === 2) {
+            member.send(`You may only send a message once every **10 seconds**, If you're trying to contact a user, consider using the \`/w | /whisper\` command to whisper them.`).catch(() => { });
             return;
         }
 
-        if (spamUser.messageCount >= 6) return;
-
-        if (spamUser.messageCount === 1) {
+        if (spamUser === 1) {
             this.ForestBot.Bot.bot.chat(`${member.user.tag}: ${content}`)
             await this.ForestBot.time.sleep(10000);
             spam.delete(author.id);
         }
-
 
         return 
     }
