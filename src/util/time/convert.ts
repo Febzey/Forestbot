@@ -32,7 +32,6 @@ export const dhms = (time: number | string) => {
 
 
 export const convertUnixTimestamp = (time: number) => {
-    //convert a unix timestamp to date dont use @ts-ignore
     const date = new Date(time * 1000);
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     const year = date.getFullYear();
